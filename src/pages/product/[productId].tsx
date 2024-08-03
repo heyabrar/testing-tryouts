@@ -1,22 +1,27 @@
-import React from "react";
 import axios from "axios";
+import React from "react";
 
 type Props = {
-  data: any;
+  singleProductData: any;
 };
 
-const SingleProduct = ({ data }: Props) => {
+// ISR (Incremental Static Regeneration)
+const SingleProductPage = ({ singleProductData }: Props) => {
   return (
-    <div>
-      <img src={data?.image} alt={data?.tile} className="w-[200px]" />
-      <h1>{data?.title}</h1>
-      <h1>{data?.description}</h1>
+    <div className="h-screen flex justify-center items-center">
+      <div>
+        <img
+          src={singleProductData?.image}
+          alt={singleProductData?.title}
+          className="w-[100px] mx-auto"
+        />
+        <h1 className="text-center">{singleProductData?.title}</h1>
+      </div>
     </div>
   );
 };
 
-// ISR Incremental Static Regeneration
-export const getStaticPaths = async () => {
+export const getStaticPaths = () => {
   return {
     paths: [],
     fallback: "blocking",
@@ -28,21 +33,21 @@ export const getStaticProps = async ({
 }: {
   params: { productId: string };
 }) => {
-  const { productId } = params;
   try {
-    const url = `https://fakestoreapi.com/products/${productId}`;
+    const url = `https://fakestoreapi.com/products/${params.productId}`;
     const response = await axios.get(url);
     return {
       props: {
-        data: response?.data,
+        singleProductData: response?.data,
+        revalidate: 303939399833,
       },
     };
   } catch (error) {
     return {
-      revalidate: 10,
       notFound: true,
+      revalidate: true,
     };
   }
 };
 
-export default SingleProduct;
+export default SingleProductPage;

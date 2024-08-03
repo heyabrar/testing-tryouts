@@ -3,81 +3,72 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 type Props = {
-  myProducts: any;
+  allProducts: any;
 };
 
-const Products = ({ myProducts }: Props) => {
-  console.log({ myProducts }); // From SERVER
-
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const Products = ({ allProducts }: Props) => {
   const router = useRouter();
+  //   const [isLoading, setIsLoading] = useState(false);
+  //   const [allProducts, setAllProducts] = useState([]);
 
-  const handleGetProducts = async () => {
-    try {
-      const url = `https://fakestoreapi.com/products`;
-      const response = await axios.get(url);
-      if (response?.data) {
-        setProducts(response?.data);
-        setIsLoading(false);
-      }
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-    }
-  };
+  //   const handleGetProducts = async () => {
+  //     try {
+  //       setIsLoading(true);
+  //       const url = `https://fakestoreapi.com/products`;
+  //       const response = await axios.get(url);
+  //       if (response?.data) {
+  //         setAllProducts(response?.data);
+  //         setIsLoading(false);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //       setIsLoading(false);
+  //     }
+  //   };
 
-  useEffect(() => {
-    handleGetProducts();
-  }, []);
+  //   useEffect(() => {
+  //     handleGetProducts();
+  //   }, []);
 
   return (
     <div>
-      <h1>Products</h1>
-      {isLoading ? (
-        <p className="h-[100vh] flex justify-center items-center">
-          Loading....
-        </p>
-      ) : (
-        <div className="grid grid-cols-4 gap-[20px]">
-          {products?.map((item: any) => {
-            return (
-              <div
-                className="border"
-                key={item.id}
-                onClick={() => router.push(`/product/${item?.id}`)}
-              >
-                {item?.title}
-                <img
-                  src={item?.image}
-                  alt={item?.title}
-                  className="w-[100px] mx-auto"
-                />
-              </div>
-            );
-          })}
-        </div>
-      )}
+      {/* {isLoading ? (
+        <h1>LOADING.....</h1>
+      ) : ( */}
+      <div className="grid grid-cols-4">
+        {allProducts?.map((item: any) => {
+          return (
+            <div
+              key={item?.id}
+              onClick={() => router.push(`/product/${item?.id}`)}
+            >
+              <h1>Kya Haal</h1>
+              <img src={item?.image} alt={item?.title} className="w-[100px]" />
+              <h2>{item?.title}</h2>
+            </div>
+          );
+        })}
+      </div>
+      {/* )} */}
     </div>
   );
 };
 
-// export const getServerSideProps = async () => {
-//   try {
-//     const url = `https://fakestoreapi.com/products`;
-//     const response = await axios.get(url);
-//     return {
-//       props: {
-//         myProducts: response?.data,
-//       },
-//     };
-//   } catch (error) {
-//     return {
-//       props: {
-//         notFound: true,
-//       },
-//     };
-//   }
-// };
+export const getServerSideProps = async () => {
+  try {
+    const url = `https://fakestoreapi.com/products`;
+    const response = await axios.get(url);
+    return {
+      props: {
+        allProducts: response?.data,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+      revalidate: true,
+    };
+  }
+};
 
 export default Products;
