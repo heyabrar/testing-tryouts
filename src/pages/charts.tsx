@@ -1,4 +1,4 @@
-import BarChart from "@/Components/Charts";
+import BarChart from "@/components/Charts";
 import React from "react";
 
 const ChartsPage = () => {
