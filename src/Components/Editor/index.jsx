@@ -39,7 +39,7 @@ const formats = [
 ];
 
 const QuillEditor = () => {
-  const [code, setCode] = useState("hellllo");
+  const [code, setCode] = useState("");
 
   const handleProcedureContentChange = (content, delta, source, editor) => {
     setCode(content);
@@ -60,6 +60,12 @@ const QuillEditor = () => {
         formats={formats}
         value={code}
         onChange={handleProcedureContentChange}
+        className="w-[50%] mx-auto mt-5"
+      />
+
+      <div
+        dangerouslySetInnerHTML={{ __html: code }}
+        className="w-[60%] mx-auto mt-5"
       />
     </div>
   );
