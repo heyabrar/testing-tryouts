@@ -12,6 +12,7 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
+import { color } from "chart.js/helpers";
 
 // Register the necessary Chart.js components
 ChartJS.register(
@@ -39,16 +40,39 @@ const BarChart = () => {
       "June",
       "July",
       "August",
+      "September",
     ],
     datasets: [
       {
-        label: "Sales",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: "red",
-        borderColor: "rgba(75, 192, 192, 1)",
+        label: "Seekho Growth (in CR)",
+        data: [1, 2, 3, 4.4, 6, 7.5, 8, 10, 11],
+        backgroundColor: "#804ee8",
+        borderColor: "#804ee8",
         borderWidth: 1,
       },
     ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as x,
+      },
+      title: {
+        display: true,
+        text: "Seekho Revenue",
+        color: "#f33ec1",
+        font: {
+          size: 30,
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true, // Ensure y-axis starts from 0
+      },
+    },
   };
 
   const pieData = {
@@ -91,42 +115,24 @@ const BarChart = () => {
     },
   };
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top" as x,
-      },
-      title: {
-        display: true,
-        text: "Monthly Sales",
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true, // Ensure y-axis starts from 0
-      },
-    },
-  };
-
   return (
     <div>
       <Bar
         data={data}
         options={options}
-        className="!w-[40%] !h-[300px] mx-auto"
+        className="!w-full lg:!w-[50%] lg:!h-[400px] mx-auto"
       />
 
       <Line
         data={data}
         options={options}
-        className="!w-[40%] !h-[300px] mx-auto"
+        className="!w-full lg:!w-[50%] lg:!h-[400px] mx-auto mt-20"
       />
 
       <Pie
         data={pieData}
         options={pieOptions}
-        className="!w-[40%] !h-[600px] mx-auto"
+        className="!w-full lg:!w-[30%] lg:!h-[500px] mx-auto mt-20"
       />
     </div>
   );
