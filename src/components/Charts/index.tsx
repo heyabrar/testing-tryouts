@@ -12,6 +12,7 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
+import UserCompletionRateGraph from "./UserCompletionChat";
 import { color } from "chart.js/helpers";
 
 // Register the necessary Chart.js components
@@ -134,6 +135,8 @@ const BarChart = () => {
         options={pieOptions}
         className="!w-full lg:!w-[30%] lg:!h-[500px] mx-auto mt-20"
       />
+
+      <UserCompletionRateGraph />
     </div>
   );
 };
