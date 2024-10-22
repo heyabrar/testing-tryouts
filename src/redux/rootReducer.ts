@@ -3,8 +3,8 @@ import useReducer from "./UserReducer/reducer";
 import useThemeReducer from "./ThemeReducer/reducer";
 
 const rootReducer = combineReducers({
-  user: useReducer,
-  theme: useThemeReducer,
+  user: useReducer as any,
+  theme: useThemeReducer as any,
 });
 
 export default rootReducer;
