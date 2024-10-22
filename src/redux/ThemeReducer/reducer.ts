@@ -4,7 +4,7 @@ const initialThemeState = {
   theme: true,
 };
 
-const useThemeReducer = (state = initialThemeState, action: any) => {
+const useThemeReducer = (state = initialThemeState, action: any): any => {
   switch (action.type) {
     case CHANGE_THEME: {
       return {

@@ -5,7 +5,7 @@ const initialUserState = {
   userInfo: null,
 };
 
-const useReducer = (state = initialUserState, action: any) => {
+const useReducer = (state = initialUserState, action: any): any => {
   switch (action.type) {
     case LOGIN: {
       return {
