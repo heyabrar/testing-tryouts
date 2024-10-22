@@ -16,6 +16,11 @@ export default function Home() {
       title: "React Quill Editor",
       link: "/react-quill",
     },
+    {
+      id: 3,
+      title: "Redux Persist",
+      link: "/redux",
+    },
   ];
 
   return (
