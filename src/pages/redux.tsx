@@ -94,7 +94,7 @@ const Redux: React.FC = () => {
         <div className="grid grid-cols-4 gap-y-5 mt-4">
           {products?.map((item: any) => {
             return (
-              <div>
+              <div key={item?.title}>
                 <img
                   src={item?.images[0]}
                   alt={item?.name}
